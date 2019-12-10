@@ -40,3 +40,6 @@ def get_readme_text(url):
     readme_text = textboxes[0].text
     return readme_text
 
+def make_corpus()
+    URLs = pd.read_csv('URL_list.csv')
+    return corpus
