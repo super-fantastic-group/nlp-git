@@ -2,17 +2,15 @@ from requests import get
 from bs4 import BeautifulSoup
 import pandas as pd
 
-search_url = 'https://github.com/search?p={}&q=stars%3A%3E100&type=Repositories'
-
 
 def scrape_links_one_page(url):
     headers = {'User-Agent': 'Codeup Data Science'} 
     response = get(url, headers=headers)
-    soup = BeautifulSoup(response.text)
+    soup = BeautifulSoup(response.text, 'html.parser')
     extension = soup.find_all("a", {"class":"v-align-middle"}, {"data-hydro-click":"url"})
     extensions = []
     for count in range(len(extension)):
-        extensions.append("github.com/" + extension[count].get_text())
+        extensions.append("http://github.com/" + extension[count].get_text())
     return extensions
 
 def make_url_list():
