@@ -1,6 +1,10 @@
 from requests import get
 from bs4 import BeautifulSoup
+
 import pandas as pd
+
+import json
+import os
 
 
 def scrape_links_one_page(url):
@@ -62,9 +66,35 @@ def get_readme_text(url):
     soup = BeautifulSoup(response.content, 'html.parser')
     textboxes = soup.findAll("div", {"class": "Box-body"})
     readme_text = textboxes[0].text
-    return readme_text
+
+    language = soup.find("span", {"class": "lang"})
+    if language == None:
+        language = "None"
+    else:
+        language = soup.find("span", {"class": "lang"}).get_text()
+
+    return {
+        "repo" : url[18:],
+        "language" : language,
+        "readme" : readme_text
+    }
 
 def make_corpus():
-    URLs = pd.read_csv('URL_list_80.csv', header=0, names=['page'])
+    URLs = pd.read_csv('URL_list_100.csv', header=0, names=['page'])
     corpus = [get_readme_text(url) for url in URLs.page]
     return corpus
+
+
+def get_corpus():
+    filename = 'data_final.json'
+
+    # check for presence of the file or make a new request
+    if os.path.exists(filename):
+        with open(filename) as json_file:
+            reads = json.load(json_file)
+        return pd.DataFrame(reads)
+    else:
+        data = make_corpus()
+        with open('data_final.json', 'w') as json_file:
+            json.dump(data, json_file)
+        return pd.DataFrame(data)
