@@ -1,4 +1,4 @@
-import requests
+from requests import get
 from bs4 import BeautifulSoup
 
 def scrape_links_one_page():
@@ -9,7 +9,13 @@ def scrape_links_one_page():
     extension = soup.find_all("a", {"class":"v-align-middle"}, {"data-hydro-click":"url"})
     extensions = []
     for count in range(len(extension)):
-        extensions.append("github.com/" + extenstion[count].get_text())
+        extensions.append("github.com/" + extension[count].get_text())
     return extensions
 
 
+def get_readme_text(url):
+    response = get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    textboxes = soup.findAll("div", {"class": "Box-body"})
+    readme_text = textboxes[0].text
+    return readme_text
