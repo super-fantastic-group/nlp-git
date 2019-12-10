@@ -1,5 +1,6 @@
 from requests import get
 from bs4 import BeautifulSoup
+import pandas as pd
 
 search_url = 'https://github.com/search?p={}&q=stars%3A%3E100&type=Repositories'
 
@@ -40,6 +41,7 @@ def get_readme_text(url):
     readme_text = textboxes[0].text
     return readme_text
 
-def make_corpus()
+def make_corpus():
     URLs = pd.read_csv('URL_list.csv')
+    corpus = [get_readme_text(url) for url in URLs]
     return corpus
