@@ -40,6 +40,6 @@ def get_readme_text(url):
     return readme_text
 
 def make_corpus():
-    URLs = pd.read_csv('URL_list.csv')
-    corpus = [get_readme_text(url) for url in URLs]
+    URLs = pd.read_csv('URL_list_80.csv', header=0, names=['page'])
+    corpus = [get_readme_text(url) for url in URLs.page]
     return corpus
