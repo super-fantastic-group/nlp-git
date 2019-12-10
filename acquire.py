@@ -30,7 +30,7 @@ def loop_through_urls():
     ten_urls = make_url_list()
     big_list = []
     for url in ten_urls:
-        big_list.append(scrape_links_one_page(url))
+        big_list.extend(scrape_links_one_page(url))
     return big_list
 
 def get_readme_text(url):
