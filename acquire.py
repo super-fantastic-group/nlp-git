@@ -21,6 +21,31 @@ def make_url_list():
     for count in range(1,11):
         urls.append("https://github.com/search?p={}&q=stars%3A%3E100&type=Repositories".format(count))
     return urls
+##############
+#bottom20 urls
+
+def make_bottom_20():
+    urls = []
+    for count in range(9,11):
+        urls.append("https://github.com/search?p={}&q=stars%3A%3E100&type=Repositories".format(count))
+    return urls
+
+def loop_through_bottom20():
+    """
+    Creates a 100 page list. Each element is a link to be scraped of their README.
+    """
+    ten_urls = make_bottom_20()
+    big_list = []
+    for url in ten_urls:
+        big_list.extend(scrape_links_one_page(url))
+    return big_list
+
+def make_corpus_20():
+    URLs = pd.read_csv('URL_list_20.csv', header=0, names=['page'])
+    corpus = [get_readme_text(url) for url in URLs.page]
+    return corpus    
+
+#############
 
 def loop_through_urls():
     """
