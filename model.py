@@ -4,9 +4,6 @@ import pandas as pd
 import numpy as np
 import re
 
-%matplotlib inline
-import matplotlib.pyplot as plt
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -15,15 +12,19 @@ from sklearn import preprocessing
 
 def encode_categories(column):
     """
-    Takes a Pandas series of string variables and 
+    Takes a Pandas series of string variables and turns them into a number that represents each unique string. 
     """
     le = preprocessing.LabelEncoder()
-    return Encoded_Categories = le.fit_transform(column)
+    return le.fit_transform(column)
 
 def make_one_hot_encoding(column):
     return pd.get_dummies(column,prefix=['Catergory:'])
 
 def create_tfidf_feature_matrix(series):
+    """
+    Accepts a column, finds the tf-idf of all the terms in each row/document. The values are made into
+    a DataFrame that is as wide as there are words in all the documents.
+    """
     tfidf = TfidfVectorizer() 
     tfidfs = tfidf.fit_transform(series.values)
     feature_matrix = pd.DataFrame(tfidfs.todense(), columns=tfidf.get_feature_names())
@@ -51,7 +52,11 @@ def run_the_model(train, test):
     return 
 
 
-def score_your_model(acutal, predicted):
+def score_your_model(actual, predicted):
+    """
+    A bunch of the sklearn metrics functions that show how well our model's predictions compare to their
+    actual values. Returns nothing. Just prints out a nicely formatted block of classification scores.
+    """
     print('Accuracy: {:.2%}'.format(accuracy_score(actual, predicted)))
     print('---')
     #A matrix that shows where the prediction compare to what they should acutally be
