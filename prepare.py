@@ -14,12 +14,29 @@ def basic_clean(text):
     """
     Lowercase everything
     Normalize unicode characters
-    Replace anything that is not a letter, number, whitespace or a single quote.
+    Replace anything that is not a letter, number, whitespace or a single quote
     """
     text = text.lower()
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8', 'ignore')
     text = re.sub(r"[^a-z0-9'\s]", '', text)
     text = re.sub(r"[\r|\n|\r\n]+", ' ', text)
+    return text
+
+def better_clean(text):
+    """
+    Lowercase everything
+    Normalize unicode characters
+    Replace anything that is not a letter with a space
+    Remove any words that are 2 or less characters   
+    Strip all white spaces that are more than one
+    Strip the beginning and end of whitespace 
+    """
+    text = text.lower()
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+    text = re.sub(r"[^a-z]", ' ', text)
+    text = re.sub(r'\b[a-z]{,2}\b', '', text)
+    text = re.sub(r'\s+', ' ', text)
+    text = text.strip()
     return text
 
 def remove_numbers(text):
