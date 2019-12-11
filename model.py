@@ -39,7 +39,7 @@ def make_model_components(feature_variable, target_variable, test_size=.25):
     tfidfs = tfidf.fit_transform(feature_variable.values)
     X = pd.DataFrame(tfidfs.todense(), columns=tfidf.get_feature_names())
     y = target_variable
-    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=test_size)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=test_size,random_state=42)
     train = pd.DataFrame(dict(actual=y_train))
     test = pd.DataFrame(dict(actual=y_test))
     return X_train, X_test, train, test

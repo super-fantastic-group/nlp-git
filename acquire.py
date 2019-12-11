@@ -75,7 +75,12 @@ def get_corpus(filename):
             json.dump(data, json_file)
         return pd.DataFrame(data)
 
-
+def get_big_corpus():
+    df1 = get_corpus('data_final.json')
+    df2 = pd.read_json('data_second.json')
+    frames = [df1,df2]
+    df = pd.concat(frames)
+    return df
 
 
 ##############
