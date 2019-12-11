@@ -1,16 +1,22 @@
 ## NLP - Scraping GitHub for Programming Languages
 ##### By Fred & Misty - Super Fantastic Team 
 
-#CHANGE 1
+scraping data from GitHub repository README files. The goal will be to build a model that can predict what programming language a repository is, given the text of the README file.
 
-predictons = run_the_model(X_train, train.actual) 
 
-pickle.dump(model, open(filename, 'wb'))
+Contents:
 
-def run_the_model(X,y):
-    """
-    We'll have to pick some classification models to use on the train-test sets.
-    """
-    tree = DecisionTreeClassifier(max_depth=7).fit(X, y)
-    predictions = tree.predict(X)
-    return predictions
+Jupyter Notebook    nlp-project.ipynb
+
+Python Modules      acquire, prepare, explore, model
+
+Data                data_final.json, URL_list_100_final.csv
+
+Environment         environment.yml
+
+Prediction Model    decision_tree_classifier.sav
+
+Data Dictionary     data_dict.txt
+
+Git Ignore File     .gitignore
+
