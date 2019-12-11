@@ -44,11 +44,11 @@ def make_model_components(feature_variable, target_variable):
     test = pd.DataFrame(dict(actual=y_test))
     return X_train, X_test, train, test
 
-def run_the_model(X,y):
+def run_the_model(X,y,depth=7):
     """
     We'll have to pick some classification models to use on the train-test sets.
     """
-    tree = DecisionTreeClassifier(max_depth=7).fit(X, y)
+    tree = DecisionTreeClassifier(max_depth=depth).fit(X, y)
     predictions = tree.predict(X)
     return predictions
 
