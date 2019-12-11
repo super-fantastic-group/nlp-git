@@ -44,13 +44,15 @@ def make_model_components(feature_variable, target_variable, test_size=.25):
     test = pd.DataFrame(dict(actual=y_test))
     return X_train, X_test, train, test
 
-def run_the_tree_model(X,y,depth=7):
+def make_tree_model(X,y,depth=5):
     """
-    We'll have to pick some classification models to use on the train-test sets.
+    5 appears to be the best depth for test accuracy 
     """
     tree = DecisionTreeClassifier(max_depth=depth).fit(X, y)
-    predictions = tree.predict(X)
-    return predictions
+    return tree
+    
+# predictions = tree.predict(X)
+# return predictions
 
 
 def score_your_model(actual, predicted):

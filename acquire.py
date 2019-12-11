@@ -61,8 +61,8 @@ def make_corpus():
     return corpus
 
 
-def get_corpus():
-    filename = 'data_final.json'
+def get_corpus(filename):
+    #filename = 'data_merged.json'
 
     # check for presence of the file or make a new request
     if os.path.exists(filename):
