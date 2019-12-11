@@ -47,10 +47,10 @@ def run_the_model(train, test):
     """
     We'll have to pick some classification models to use on the train-test sets.
     """
-    #tree = DecisionTreeClassifier(max_depth=7).fit(X_train, y_train)
-    #train['predicted'] = tree.predict(X_train)
-    #test['predicted'] = tree.predict(X_test)
-    return 
+    tree = DecisionTreeClassifier(max_depth=7).fit(train, train)
+    train['predicted'] = tree.predict(train)
+    test['predicted'] = tree.predict(test)
+    return train['predicted'], test['predicted']
 
 
 def score_your_model(actual, predicted):
