@@ -7,6 +7,7 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score
 from sklearn import preprocessing
 
@@ -48,11 +49,12 @@ def make_tree_model(X,y,depth=5):
     """
     5 appears to be the best depth for test accuracy 
     """
-    tree = DecisionTreeClassifier(max_depth=depth).fit(X, y)
+    tree = DecisionTreeClassifier(max_depth=depth, random_state=42).fit(X, y)
     return tree
-    
-# predictions = tree.predict(X)
-# return predictions
+
+def make_forest_model(X,y,depth=20):
+    rf = RandomForestClassifier(max_depth=depth, random_state=42).fit(X, y)
+    return rf
 
 
 def score_your_model(actual, predicted):
