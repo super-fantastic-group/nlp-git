@@ -30,7 +30,7 @@ def create_tfidf_feature_matrix(series):
     feature_matrix = pd.DataFrame(tfidfs.todense(), columns=tfidf.get_feature_names())
     return feature_matrix
 
-def make_model_components(feature_variable, target_variable):
+def make_model_components(feature_variable, target_variable, test_size=.25):
     """
     Takes the one column as the feature matrix, one column as target variable. Splits them into test-train.
     Creates a dataframe for the Test and Train of the target variables (y_train, y_test)
@@ -39,19 +39,18 @@ def make_model_components(feature_variable, target_variable):
     tfidfs = tfidf.fit_transform(feature_variable.values)
     X = pd.DataFrame(tfidfs.todense(), columns=tfidf.get_feature_names())
     y = target_variable
-    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=.2)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=test_size)
     train = pd.DataFrame(dict(actual=y_train))
     test = pd.DataFrame(dict(actual=y_test))
     return X_train, X_test, train, test
 
-def run_the_model(train, test):
+def run_the_tree_model(X,y,depth=7):
     """
     We'll have to pick some classification models to use on the train-test sets.
     """
-    tree = DecisionTreeClassifier(max_depth=7).fit(train, train)
-    train['predicted'] = tree.predict(train)
-    test['predicted'] = tree.predict(test)
-    return train['predicted'], test['predicted']
+    tree = DecisionTreeClassifier(max_depth=depth).fit(X, y)
+    predictions = tree.predict(X)
+    return predictions
 
 
 def score_your_model(actual, predicted):
