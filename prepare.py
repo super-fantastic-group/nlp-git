@@ -58,3 +58,11 @@ def stem(text):
     stems = [ps.stem(word) for word in text.split()]
     article_stemmed = ' '.join(stems)
     return article_stemmed
+
+def prep_readme(df):
+    df["original"] = df.readme
+    df["stemmed"] = df.readme.apply(basic_clean).apply(stem)
+    df["lemmatized"] = df.readme.apply(basic_clean).apply(lemmatize)
+    df["clean"] = df.readme.apply(basic_clean).apply(remove_stopwords)
+    df.drop(columns=["readme"], inplace=True)
+    return df
