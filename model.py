@@ -44,7 +44,7 @@ def make_model_components(feature_variable, target_variable):
     test = pd.DataFrame(dict(actual=y_test))
     return X_train, X_test, train, test
 
-def run_the_model(X,y,depth=7):
+def run_the_tree_model(X,y,depth=7):
     """
     We'll have to pick some classification models to use on the train-test sets.
     """
