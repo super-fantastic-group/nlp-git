@@ -36,7 +36,8 @@ def make_model_components(feature_variable, target_variable):
     Creates a dataframe for the Test and Train of the target variables (y_train, y_test)
     """
     tfidf = TfidfVectorizer()
-    X = tfidf.fit_transform(feature_variable)
+    tfidfs = tfidf.fit_transform(feature_variable.values)
+    X = pd.DataFrame(tfidfs.todense(), columns=tfidf.get_feature_names())
     y = target_variable
     X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=.2)
     train = pd.DataFrame(dict(actual=y_train))

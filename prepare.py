@@ -66,3 +66,12 @@ def prep_readme(df):
     df["clean"] = df.readme.apply(basic_clean).apply(remove_stopwords)
     df.drop(columns=["readme"], inplace=True)
     return df
+
+def cut_singles(df):
+    """
+    Removes the rows that are the only row for their language. Returns a dataframe with languages that have
+    more than one row
+    """
+    keepers = df.language.value_counts().head(10).index
+    df = df[df.language.isin(keepers)]   
+    return df
