@@ -62,8 +62,6 @@ def make_corpus():
 
 
 def get_corpus(filename):
-    #filename = 'data_merged.json'
-
     # check for presence of the file or make a new request
     if os.path.exists(filename):
         with open(filename) as json_file:
@@ -71,12 +69,12 @@ def get_corpus(filename):
         return pd.DataFrame(reads)
     else:
         data = make_corpus()
-        with open('data_final.json', 'w') as json_file:
+        with open(filename, 'w') as json_file:
             json.dump(data, json_file)
         return pd.DataFrame(data)
 
 def get_big_corpus():
-    df1 = get_corpus('data_final.json')
+    df1 = pd.read_json('data_final.json')
     df2 = pd.read_json('data_second.json')
     frames = [df1,df2]
     df = pd.concat(frames)
