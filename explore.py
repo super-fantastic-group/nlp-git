@@ -11,6 +11,7 @@ def count_percent(df):
     return labels
 
 def readme_length(df):
+    df["length"]= df.readme.str.split().str.len()
     return df.groupby("language").length.agg(["min","mean","max"])
 
 def words_dict(df):
