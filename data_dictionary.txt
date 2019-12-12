@@ -15,3 +15,6 @@ Model DataFrame:
     prepared:   Readme content after applying regex functions and lemmatized.
     
     length:     Wordcount of prepared readme. 
+
+dec_tree_model.p:
+    Serialized file of model used in notebook. Requires pickle module to be imported to load this file.

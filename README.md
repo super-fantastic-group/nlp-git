@@ -23,7 +23,7 @@ Predicting the primary language used in a Github repository by anazlying their r
     JSON file with the contents of each readme, the language Github has labeled for each repo, and their URL
     CSV that contains the urls of the scrapped repositories
 
-    Prediction Model    decision_tree_classifier.sav
+    Prediction Model    dec_tree_model.p
     A pickle file that stores a the machine learning algorithm fitted to the training data used in the analysis
 
     Data Dictionary     data_dict.txt
