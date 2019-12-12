@@ -84,7 +84,7 @@ def get_big_corpus():
 
 
 ##############
-#bottom20 urls
+#bottom20 urls in case rate limiting is implemented again.
 
 def make_bottom_20():
     urls = []
