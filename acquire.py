@@ -8,6 +8,9 @@ import os
 
 
 def scrape_links_one_page(url):
+    """
+    Creates a list of 10 urls from a single page, given that page's url
+    """
     headers = {'User-Agent': 'Codeup Data Science'} 
     response = get(url, headers=headers)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -62,7 +65,6 @@ def make_corpus():
 
 
 def get_corpus(filename):
-    # check for presence of the file or make a new request
     if os.path.exists(filename):
         with open(filename) as json_file:
             reads = json.load(json_file)
@@ -74,7 +76,7 @@ def get_corpus(filename):
         return pd.DataFrame(data)
 
 def get_big_corpus():
-    df1 = pd.read_json('data_final.json')
+    df1 = pd.read_json('data_first.json')
     df2 = pd.read_json('data_second.json')
     frames = [df1,df2]
     df = pd.concat(frames)
