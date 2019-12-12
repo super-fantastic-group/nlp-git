@@ -17,8 +17,8 @@ def readme_length(df):
 def words_dict(df):
     words={}
     for lang in df.language.unique():
-        words["{}_words".format(lang.lower())] = ' '.join(df[df.language == lang].readme)
-    words["all_words"] = ' '.join(df.readme) 
+        words["{}_words".format(lang.lower())] = ' '.join(df[df.language == lang].prepared)
+    words["all_words"] = ' '.join(df.prepared) 
     return words
 
 def word_count_by_lang(words):
@@ -34,11 +34,12 @@ def word_count_by_lang(words):
                     .apply(lambda s: s.astype(int)))
     return word_counts
 
-def one_word_one_cloud(words):
+def one_word_one_cloud(words, title):
     plt.figure(figsize=(10, 6))
     cloud = WordCloud(background_color='white', width=1200, height=800).generate(words)
 
     plt.imshow(cloud)
+    plt.title(title)
     plt.axis("off")
     plt.show()
 
