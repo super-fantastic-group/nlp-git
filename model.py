@@ -52,8 +52,8 @@ def make_tree_model(X,y,depth=5):
     tree = DecisionTreeClassifier(max_depth=depth, random_state=42).fit(X, y)
     return tree
 
-def make_forest_model(X,y,depth=20):
-    rf = RandomForestClassifier(max_depth=depth, random_state=42).fit(X, y)
+def make_forest_model(X,y,depth=5,trees=10):
+    rf = RandomForestClassifier(max_depth=depth, n_estimators=trees, random_state=42).fit(X, y)
     return rf
 
 
