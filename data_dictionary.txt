@@ -1,0 +1,17 @@
+data_first.json, data_second.json
+    Repo:       Title of Repository
+    
+    Language:   Primary Language of Repository, as assigned by Github
+
+    readme:     Text content of repository readme.
+
+Model DataFrame: 
+    Repo:       Title of Repository:
+
+    Language:   Primary Language of Repository, as assigned by Github:
+    
+    readme:     Text content of repository readme.
+
+    prepared:   Readme content after applying regex functions and lemmatized.
+    
+    length:     Wordcount of prepared readme. 
